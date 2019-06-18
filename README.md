@@ -3,7 +3,7 @@ Goods Tracker is an application which will fetch and show the product [deliverie
 
 Onclick of product [deliveries] details it will display location on map along with product details.
 
-Features:
+**Features:**
 
 Display Product [deliveries] details
 
