@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">GoodsTracker</string>
+    <string name="dismiss">Dismiss</string>
+
+    <string name="msg_network_avalable">Network available.</string>
+    <string name="msg_no_details">No items to display. Retry</string>
+
+    <string name="err_no_connectivity">Network Unavailable.</string>
+    <string name="error_generic_desc_message">Something went wrong, please try again later</string>
+
+    <string name="msg_runtime_permissions">Please enable ALL permissions from app settings.</string>
+    <string name="permisson_granted">Permissions Granted</string>
+    <string name="txt_enable">Enable</string>
+    <string name="txt_grant">Grant</string>
+
+    <string name="msg_offline_data">Offline saved data displayed</string>
+
+    <string name="txt_unit_km">%1$s km</string>
+    <string name="txt_image_description">Image Detail</string>
+
+</resources>
