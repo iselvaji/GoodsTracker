@@ -22,12 +22,19 @@ Display selected product details from list
 Display map with marker with product delivery location
 
 **Libraries and tools**
+
 MVVM Pattern with Live data, View Model.
+
 Pagination using Android Pagination library.
+
 Map – Fused Location Provider client, Map V2.
+
 Network – Retrofit, okhttp, Gson, Glide
+
 Automation – Espresso
+
 View binding – Butter Knife
+
 Build - Gradle
 
 
