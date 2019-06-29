@@ -1,6 +1,5 @@
 package com.easyvan.goodstracker.view;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -15,8 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.easyvan.goodstracker.R;
-import com.easyvan.goodstracker.model.rest.product.pojo.Product;
 import com.easyvan.goodstracker.model.rest.map.CurrentLocationListener;
+import com.easyvan.goodstracker.model.rest.product.pojo.Product;
 import com.easyvan.goodstracker.utils.MapUtils;
 import com.easyvan.goodstracker.viewmodel.DetailsViewModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -71,6 +70,9 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback{
     @BindString(R.string.msg_network_avalable)
     String ConnectionAvailable;
 
+    @BindString(R.string.txt_title_details)
+    String Title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,8 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback{
 
         ButterKnife.bind(this);
 
-        checkLocationPermission();
+        getSupportActionBar().setTitle(Title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
@@ -157,13 +160,6 @@ public class DetailsActivity extends BaseActivity implements OnMapReadyCallback{
 
             gmap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         }
-    }
-
-    private void checkLocationPermission() {
-
-        requestAppPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                R.string.msg_runtime_permissions,
-                LOCATION_REQUEST);
     }
 
     @SuppressLint("MissingPermission")

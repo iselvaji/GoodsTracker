@@ -1,6 +1,5 @@
 package com.easyvan.goodstracker.view;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -63,6 +61,9 @@ public class MainActivity extends BaseActivity implements ItemSelectCallback {
     @BindString(R.string.permisson_granted)
     String MsgPermissonGranted;
 
+    @BindString(R.string.txt_title_products)
+    String Title;
+
     @BindView(R.id.progressbar)
     ProgressBar mProgressBar;
 
@@ -81,7 +82,8 @@ public class MainActivity extends BaseActivity implements ItemSelectCallback {
 
     private void initUIElements() {
 
-        mRecyclerView.setHasFixedSize(true);
+        getSupportActionBar().setTitle(Title);
+       // mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -98,7 +100,6 @@ public class MainActivity extends BaseActivity implements ItemSelectCallback {
                 if (products.size() != 0) {
                     mTextViewNoItems.setVisibility(View.GONE);
                     mRecyclerViewAdapter.submitList(products);
-                    getUserLocation();
                 }
                 else {
                     mTextViewNoItems.setVisibility(View.VISIBLE);
@@ -131,13 +132,6 @@ public class MainActivity extends BaseActivity implements ItemSelectCallback {
 
     }
 
-    private void getUserLocation() {
-
-        requestAppPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                R.string.msg_runtime_permissions,
-                AppConstants.LOCATION_REQUEST);
-    }
-
     @Override
     public void onConnectionStateChange(boolean connected) {
 
@@ -163,7 +157,7 @@ public class MainActivity extends BaseActivity implements ItemSelectCallback {
     @Override
     public void onPermissionsGranted(int requestCode) {
 
-        Snackbar.make(mContainer, MsgPermissonGranted, Snackbar.LENGTH_SHORT).show();
+        //Snackbar.make(mContainer, MsgPermissonGranted, Snackbar.LENGTH_SHORT).show();
 
         switch (requestCode) {
             case AppConstants.LOCATION_REQUEST:

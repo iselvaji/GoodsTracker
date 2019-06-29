@@ -3,6 +3,7 @@ package com.easyvan.goodstracker.model.datasource;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.PageKeyedDataSource;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.easyvan.goodstracker.model.rest.DataLoadState;
@@ -26,8 +27,10 @@ import static com.easyvan.goodstracker.utils.AppConstants.PAGE_SIZE;
 public class ProductDataSource extends PageKeyedDataSource<Integer, Product> {
 
     private final MutableLiveData<DataLoadState> mDataLodingState;
+    private Context mContext;
 
-    ProductDataSource() {
+    ProductDataSource(Context context) {
+        mContext = context;
         mDataLodingState = new MutableLiveData<>();
     }
 
@@ -39,7 +42,7 @@ public class ProductDataSource extends PageKeyedDataSource<Integer, Product> {
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull final LoadInitialCallback<Integer, Product> callback) {
 
         mDataLodingState.postValue(DataLoadState.LOADING);
-        RestApi api = RestApiClient.getClient().create(RestApi.class);
+        RestApi api = RestApiClient.getClient(mContext).create(RestApi.class);
         Call<List<Product>> call = api.fetchProducts(FIRST_PAGE, PAGE_SIZE);
 
         try {
@@ -66,7 +69,7 @@ public class ProductDataSource extends PageKeyedDataSource<Integer, Product> {
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Product> callback) {
 
         mDataLodingState.postValue(DataLoadState.LOADING);
-        RestApi api = RestApiClient.getClient().create(RestApi.class);
+        RestApi api = RestApiClient.getClient(mContext).create(RestApi.class);
         Call<List<Product>> call = api.fetchProducts(params.key, PAGE_SIZE);
 
         try {

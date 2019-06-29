@@ -4,17 +4,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.easyvan.goodstracker.GoodsTrackerApplication;
-
 /**
  * Created by sm5 on 6/12/2019.
  */
 
 public class NetworkUtils {
 
-    public static boolean isNetworkConnected() {
+    public static boolean isNetworkConnected(Context context) {
 
-        Context context = GoodsTrackerApplication.getInstance().getContext();
+        //Context context = GoodsTrackerApplication.getContext();
 
         ConnectivityManager connectivityManager
                 = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);

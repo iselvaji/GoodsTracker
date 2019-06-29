@@ -1,6 +1,8 @@
 package com.easyvan.goodstracker.model.rest.product;
 
-import com.easyvan.goodstracker.GoodsTrackerApplication;
+import android.content.Context;
+
+import com.easyvan.goodstracker.utils.CacheUtils;
 
 import java.io.IOException;
 
@@ -24,17 +26,17 @@ public class RestApiClient {
     private static final String BASE_URL = "https://mock-api-mobile.dev.lalamove.com/";
     private static Retrofit mRetrofit = null;
 
-    public static Retrofit getClient() {
+    public static Retrofit getClient(final Context context) {
 
         if (mRetrofit == null) {
 
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-                    .cache(GoodsTrackerApplication.getInstance().getOfflineCache())
+                    .cache(CacheUtils.getOfflineCache(context))
                     .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request request = chain.request();
-                            if(isNetworkConnected()){
+                            if(isNetworkConnected(context)){
                                 request = request.newBuilder().header("Cache-Control", "public, max-age=" + CACHE_MAX_AGE).build();
                             }
                             else {

@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.easyvan.goodstracker.GoodsTrackerApplication;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,6 +32,7 @@ public class CurrentLocationListener extends LiveData<Location> implements Googl
     private static CurrentLocationListener mInstance;
     private GoogleApiClient mGoogleApiClient;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Context mContext;
 
     private synchronized void buildGoogleApiClient(Context appContext) {
         mGoogleApiClient = new GoogleApiClient.Builder(appContext)
@@ -43,6 +43,7 @@ public class CurrentLocationListener extends LiveData<Location> implements Googl
     }
 
     private CurrentLocationListener(Context appContext) {
+        mContext = appContext;
         buildGoogleApiClient(appContext);
     }
 
@@ -116,8 +117,7 @@ public class CurrentLocationListener extends LiveData<Location> implements Googl
 
     private FusedLocationProviderClient getFusedLocationProviderClient() {
         if (mFusedLocationProviderClient == null) {
-            Context context = GoodsTrackerApplication.getInstance().getContext();
-            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+            mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext);
         }
         return mFusedLocationProviderClient;
     }
